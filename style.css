@@ -1,4 +1,4 @@
-/* 🌐 Estilos generales */
+
 body {
   font-family: Arial, sans-serif;
   background-color: #b995d1;
@@ -11,7 +11,7 @@ h1 {
   color: #381e1e;
 }
 
-/* 🧱 Contenedor principal */
+
 #app {
   max-width: 500px;
   margin: 0 auto;
@@ -21,14 +21,14 @@ h1 {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 🧾 Input de tareas */
+
 input[type="text"] {
   width: 70%;
   padding: 10px;
   margin-bottom: 10px;
 }
 
-/* 🟪 Botones generales (incluye "Agregar" y filtros) */
+
 button {
   padding: 10px 15px;
   margin: 5px;
@@ -43,13 +43,13 @@ button:hover {
   background-color: #a585b4;
 }
 
-/* 📋 Lista de tareas */
+
 ul {
   list-style-type: none;
   padding: 0;
 }
 
-/* 🗂️ Estilo para cada tarea */
+
 li {
   animation: fadeIn 0.4s ease;
   background-color: #f5f5f5;
@@ -62,14 +62,14 @@ li {
   gap: 10px;
 }
 
-/* 📌 Texto de la tarea */
+
 li span {
   flex-grow: 1;
   margin-left: 10px;
   text-align: left;
 }
 
-/* 🟪 Botones dentro de la lista (editar, eliminar) igual al botón "Agregar" */
+
 li button {
   background-color: #b995d1;
   color: rgb(17, 10, 10);
@@ -84,7 +84,7 @@ li button:hover {
   background-color: #a585b4;
 }
 
-/* ⚠️ Modal de error */
+
 #modalError {
   position: fixed;
   top: 50%;
@@ -106,7 +106,7 @@ li button:hover {
   display: none;
 }
 
-/* ❌ Botón cerrar modal */
+
 #cerrarModal {
   margin-top: 10px;
   background-color: #ff4d4d;
@@ -117,7 +117,45 @@ li button:hover {
   cursor: pointer;
 }
 
-/* 🎞️ Animación fadeIn */
+#modalConfirmacion {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffe5e5;
+  border: 2px solid #ff4d4d;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  font-size: 1rem;
+  color: #a94442;
+  max-width: 300px;
+  text-align: center;
+}
+
+#modalConfirmacion.hidden {
+  display: none;
+}
+
+#confirmarEliminar,
+#cancelarEliminar {
+  margin: 5px;
+  background-color: #b995d1;
+  color: #000;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#confirmarEliminar:hover,
+#cancelarEliminar:hover {
+  background-color: #a585b4;
+}
+
+
+
 @keyframes fadeIn {
   from {
     opacity: 0;

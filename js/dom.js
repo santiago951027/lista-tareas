@@ -59,9 +59,11 @@ export function mostrarTareas(tareasAMostrar = tareas) {
     const botonEliminar = document.createElement("button");
     botonEliminar.textContent = "Eliminar";
     botonEliminar.addEventListener("click", () => {
-      eliminarTarea(tarea.id);
+      mostrarConfirmacion("¿Estás seguro de eliminar esta tarea?", () => {
+        eliminarTarea(tarea.id);
+      });
     });
-
+    
     li.appendChild(checkbox);
     li.appendChild(texto);
     li.appendChild(botonEditar);
@@ -106,4 +108,30 @@ export function mostrarModal(mensaje) {
 
 export function cerrarModal() {
   document.getElementById("modalError").classList.add("hidden");
+}
+
+function mostrarConfirmacion(mensaje, callbackAceptar) {
+  const modal = document.getElementById("modalConfirmacion");
+  const texto = document.getElementById("mensajeConfirmacion");
+  const btnSi = document.getElementById("confirmarEliminar");
+  const btnNo = document.getElementById("cancelarEliminar");
+
+  texto.textContent = mensaje;
+  modal.classList.remove("hidden");
+
+  // Limpiar eventos anteriores
+  const nuevoBtnSi = btnSi.cloneNode(true);
+  const nuevoBtnNo = btnNo.cloneNode(true);
+  btnSi.parentNode.replaceChild(nuevoBtnSi, btnSi);
+  btnNo.parentNode.replaceChild(nuevoBtnNo, btnNo);
+
+  // Agregar nuevos eventos
+  nuevoBtnSi.addEventListener("click", () => {
+    modal.classList.add("hidden");
+    callbackAceptar(); // Ejecuta la acción de eliminar
+  });
+
+  nuevoBtnNo.addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
 }
