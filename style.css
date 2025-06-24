@@ -166,3 +166,14 @@ li button:hover {
     transform: translateY(0);
   }
 }
+
+.modal {
+  pointer-events: auto;
+}
+
+body.modal-activo *:not(.modal):not(.modal *) {
+  pointer-events: none !important;
+  user-select: none;
+  opacity: 0.5;
+}
+

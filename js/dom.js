@@ -118,6 +118,7 @@ function mostrarConfirmacion(mensaje, callbackAceptar) {
 
   texto.textContent = mensaje;
   modal.classList.remove("hidden");
+  document.body.classList.add("modal-activo"); // 🔐 bloquear todo
 
   // Limpiar eventos anteriores
   const nuevoBtnSi = btnSi.cloneNode(true);
@@ -125,13 +126,15 @@ function mostrarConfirmacion(mensaje, callbackAceptar) {
   btnSi.parentNode.replaceChild(nuevoBtnSi, btnSi);
   btnNo.parentNode.replaceChild(nuevoBtnNo, btnNo);
 
-  // Agregar nuevos eventos
   nuevoBtnSi.addEventListener("click", () => {
     modal.classList.add("hidden");
-    callbackAceptar(); // Ejecuta la acción de eliminar
+    document.body.classList.remove("modal-activo"); // 🔓 desbloquear
+    callbackAceptar();
   });
 
   nuevoBtnNo.addEventListener("click", () => {
     modal.classList.add("hidden");
+    document.body.classList.remove("modal-activo"); // 🔓 desbloquear
   });
 }
+
