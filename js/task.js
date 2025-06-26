@@ -1,9 +1,10 @@
 let idContador = 1;
 
 export class Task {
-  constructor(name) {
+  constructor(name, category = "sin-categoria") {
     this.id = idContador++;
     this.name = name;
+    this.category = category;
     this.completed = false;
   }
 

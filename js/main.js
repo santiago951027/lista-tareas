@@ -19,17 +19,24 @@ mostrarTareas();
 document.getElementById("addTaskBtn").addEventListener("click", () => {
   const input = document.getElementById("taskInput");
   const taskName = input.value.trim();
+  const categoria = document.getElementById("taskCategory").value;
 
   if (taskName === "") {
     mostrarModal("❌ Por favor escribe una tarea.");
     return;
   }
 
-  const nuevaTarea = new Task(taskName);
+  if (categoria === "sin-categoria"){
+    mostrarModal("❌ Debes seleccionar una categoria válida.");
+    return;
+  }
+  const nuevaTarea = new Task(taskName, categoria);
   tareas.push(nuevaTarea);
   guardarTareasEnLocalStorage(tareas);
   mostrarTareas();
+  
   input.value = "";
+  document.getElementById("taskCategory").value = "sin-categoria"; // Reiniciar el select
 });
 
 document.getElementById("showAll").addEventListener("click", () => {

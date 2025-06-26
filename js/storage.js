@@ -8,10 +8,14 @@ export function cargarTareasDesdeLocalStorage(tareas) {
   const tareasGuardadas = localStorage.getItem("tareas");
   if (tareasGuardadas) {
     const tareasParseadas = JSON.parse(tareasGuardadas);
+
     tareasParseadas.forEach((t) => {
-      const tarea = new Task(t.name);
+      const categoria = t.category || "sin-categoria";
+
+      const tarea = new Task(t.name, categoria);
       tarea.id = t.id;
       tarea.completed = t.completed;
+      
       tareas.push(tarea);
     });
 

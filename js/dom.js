@@ -24,7 +24,7 @@ export function mostrarTareas(tareasAMostrar = tareas) {
     checkbox.checked = tarea.completed;
     
     if (tarea.completed) {
-      checkbox.disabled = true; // 🔒 Desactiva si ya está completada
+      checkbox.disabled = true; //  Desactiva si ya está completada
     } else {
       checkbox.addEventListener("change", () => {
         checkbox.checked = false; // visualmente lo deja sin marcar mientras se confirma
@@ -46,13 +46,27 @@ export function mostrarTareas(tareasAMostrar = tareas) {
       });
     }
     
-    const texto = document.createElement("span");
-    texto.textContent = tarea.name;
+    const nombreTarea = document.createElement("span");
+    nombreTarea.textContent = tarea.name;
     if (tarea.completed) {
-      texto.style.textDecoration = "line-through";
+      nombreTarea.style.textDecoration = "line-through";
     }
+    const badge = document.createElement("span");
+    badge.classList.add("badge");
+    badge.textContent = tarea.category;
+    
+   
+    const contenedorTexto = document.createElement("div");
+    contenedorTexto.style.display = "flex";
+    contenedorTexto.style.flexDirection = "column";
+    contenedorTexto.style.alignItems = "flex-start";
+    contenedorTexto.appendChild(nombreTarea);
+    contenedorTexto.appendChild(badge);
+
     const botonEditar = document.createElement("button");
-    botonEditar.textContent = "Editar";
+    botonEditar.textContent = "✏️";
+    botonEditar.classList.add("boton-acciones");
+    
     
     if (tarea.completed) {
       botonEditar.disabled = true;
@@ -86,18 +100,33 @@ export function mostrarTareas(tareasAMostrar = tareas) {
     }
 
     const botonEliminar = document.createElement("button");
-    botonEliminar.textContent = "Eliminar";
+    botonEliminar.textContent = "🗑️";
+    botonEliminar.classList.add("boton-acciones");
     botonEliminar.addEventListener("click", () => {
       mostrarConfirmacion("¿Estás seguro de eliminar esta tarea?", () => {
         eliminarTarea(tarea.id);
       });
     });
+    const izquierda = document.createElement("div");
+    izquierda.style.flex = "1";
+    izquierda.style.display = "flex";
+    izquierda.style.alignItems = "center";
+    izquierda.style.gap = "10px";
     
-    li.appendChild(checkbox);
-    li.appendChild(texto);
-    li.appendChild(botonEditar);
-    li.appendChild(botonEliminar);
-
+    const derecha = document.createElement("div");
+    derecha.style.display = "flex";
+    derecha.style.gap = "5px";
+    
+    izquierda.appendChild(checkbox);
+    izquierda.appendChild(contenedorTexto);
+    
+    derecha.appendChild(botonEditar);
+    derecha.appendChild(botonEliminar);
+    
+    li.appendChild(izquierda);
+    li.appendChild(derecha);
+    
+    
     lista.appendChild(li);
   });
 
