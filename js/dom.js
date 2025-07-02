@@ -56,13 +56,47 @@ export function mostrarTareas(tareasAMostrar = tareas) {
     badge.textContent = tarea.category;
     
    
-    const contenedorTexto = document.createElement("div");
-    contenedorTexto.style.display = "flex";
-    contenedorTexto.style.flexDirection = "column";
-    contenedorTexto.style.alignItems = "flex-start";
-    contenedorTexto.appendChild(nombreTarea);
-    contenedorTexto.appendChild(badge);
 
+    
+    const fecha = document.createElement("span");
+    fecha.classList.add("fecha");
+    
+    const hoy = new Date();
+    const mañana = new Date();
+    mañana.setDate(hoy.getDate() + 1);
+    
+    if (tarea.fecha && tarea.fecha !== "Sin fecha") {
+      const fechaTarea = new Date(tarea.fecha);
+      
+      if (!tarea.completed) {
+        if (fechaTarea < hoy) {
+          fecha.classList.add("fecha-vencida");  // rojo
+          fecha.textContent = `🔴 Vencida: ${tarea.fecha}`;
+        } else if (fechaTarea.toDateString() === hoy.toDateString()) {
+          fecha.classList.add("fecha-hoy");  // amarillo
+          fecha.textContent = `🟡 Vence hoy: ${tarea.fecha}`;
+        } else if (fechaTarea.toDateString() === mañana.toDateString()) {
+          fecha.classList.add("fecha-hoy");  // amarillo
+          fecha.textContent = `🟡 Vence mañana: ${tarea.fecha}`;
+        } else {
+          fecha.textContent = `📅 ${tarea.fecha}`;
+        }
+      } else {
+        fecha.textContent = `📅 ${tarea.fecha}`;
+      }
+    } else {
+      fecha.textContent = `📅 Sin fecha`;
+    }
+
+        const contenedorTexto = document.createElement("div");
+        contenedorTexto.style.display = "flex";
+        contenedorTexto.style.flexDirection = "column";
+        contenedorTexto.style.alignItems = "flex-start";
+        contenedorTexto.appendChild(nombreTarea);
+        contenedorTexto.appendChild(badge);
+        contenedorTexto.appendChild(fecha); 
+    
+    
     const botonEditar = document.createElement("button");
     botonEditar.textContent = "✏️";
     botonEditar.classList.add("boton-acciones");

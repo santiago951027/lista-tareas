@@ -83,6 +83,22 @@ li span {
   text-align: left;
 }
 
+.fecha {
+  font-size: 0.8em;
+  margin-top: 2px;
+}
+
+.fecha-vencida {
+  color: red;
+  font-weight: bold;
+}
+
+.fecha-hoy {
+  color: orange;
+  font-weight: bold;
+}
+
+
 
 li button {
   background-color: #b995d1;

@@ -20,23 +20,27 @@ document.getElementById("addTaskBtn").addEventListener("click", () => {
   const input = document.getElementById("taskInput");
   const taskName = input.value.trim();
   const categoria = document.getElementById("taskCategory").value;
+  const fecha = document.getElementById("taskDate").value;
 
   if (taskName === "") {
     mostrarModal("❌ Por favor escribe una tarea.");
     return;
   }
 
-  if (categoria === "sin-categoria"){
-    mostrarModal("❌ Debes seleccionar una categoria válida.");
+  if (categoria === "sin-categoria") {
+    mostrarModal("❌ Debes seleccionar una categoría válida.");
     return;
   }
-  const nuevaTarea = new Task(taskName, categoria);
+
+  const nuevaTarea = new Task(taskName, categoria, fecha);
   tareas.push(nuevaTarea);
   guardarTareasEnLocalStorage(tareas);
   mostrarTareas();
-  
+
+  // 🧹 Limpiar campos del formulario
   input.value = "";
-  document.getElementById("taskCategory").value = "sin-categoria"; // Reiniciar el select
+  document.getElementById("taskDate").value = "";              // ✅ Limpia la fecha
+  document.getElementById("taskCategory").value = "sin-categoria"; // Reinicia el select
 });
 
 document.getElementById("showAll").addEventListener("click", () => {

@@ -9,16 +9,14 @@ export function cargarTareasDesdeLocalStorage(tareas) {
   if (tareasGuardadas) {
     const tareasParseadas = JSON.parse(tareasGuardadas);
 
-    tareasParseadas.forEach((t) => {
-      const categoria = t.category || "sin-categoria";
-
-      const tarea = new Task(t.name, categoria);
-      tarea.id = t.id;
-      tarea.completed = t.completed;
-      
-      tareas.push(tarea);
-    });
-
+   tareasParseadas.forEach((t) => {
+  const tarea = new Task(t.name, t.category, t.fecha || "Sin fecha");
+  tarea.id = t.id;
+  tarea.completed = t.completed;
+  tareas.push(tarea);
+});
+    
+    
     if (tareas.length > 0) {
       const nuevoId = Math.max(...tareas.map((t) => t.id)) + 1;
       actualizarContadorID(nuevoId);
